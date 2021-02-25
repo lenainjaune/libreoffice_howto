@@ -1,10 +1,51 @@
 Apprendre LibreOffice Writer
 Table des matières
 
-#Références multiples à la même note
+# Références multiples à la même note
 Tags : cross-reference endnote footnote
 Voir https://ask.libreoffice.org/en/question/156920/how-do-i-repeat-an-endnote/
 
-#Ajout table des matières
+
+# Ajout table des matières
 Tags : contents table
 Voir https://ask.libreoffice.org/en/question/156920/how-do-i-repeat-an-endnote/
+
+
+# Comparer 2 documents D1 avec D2
+# https://ask.libreoffice.org/en/question/215770/compare-two-documents/?answer=215804#post-id-215804
+
+Faire une copie D1 du document initial D0 (empêche l'erreur d'écraser par mégarde)
+Ouvrir D1
+Edition > Suivi des modifications > Comparer le document + sélectionner D2
+Une popup indiquant sommairement les occurences des différences, fermer cette fenêtre
+
+Le document est maintenant parsemé de texte en couleur "or" qui indiquent une différence
+
+2 cas :
+- ce texte n'est PAS barré => présent dans D2 mais pas dans D1
+- ce texte est barré => présent dans D1 mais pas dans D2
+
+Il suffit alors d'accepter ou de refuser chaque modification
+Enfin enregistrer D1
+
+On peut supprimer D0 
+
+
+# Afficher une barre d'outils de manière permanente
+Apparemment les barres d'outils incluses ne peuvent l'être
+Créer une barre d'outils personnalisée, ajouter les outils voulus
+
+
+# Ancrer toutes les images en tant que caractère
+https://bz.apache.org/ooo/show_bug.cgi?id=19814#c14
+
+unzip document_name.odt styles.xml
+
+For the record, the workaround given above is wrong in fact. You've to edit the styles.xml file and change the properties in the following tag:
+
+<style:style style:name="Graphics" style:family="graphic">
+text:anchor-type="paragraph" -> text:anchor-type="as-char"
+
+zip document_name.odt styles.xml
+
+Nota : il peut y avoir un warning concernant le CRC ; à priori on peut l'ignorer
