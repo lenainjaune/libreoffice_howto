@@ -63,17 +63,14 @@ text:anchor-type="paragraph" -> text:anchor-type="as-char"
 ajouter le fichier modifié
 
 # Get recursive owner
-TODO : refaire et simplifier
 Utile pour distinguer des fichiers LO après une récupération de type TestDisk ou Photorec qui ne donne pas les noms de fichiers
 cd <rooting_path>
 find . -type f \( -name "*.ods" -or -name "*.odt" -or -name "*.odg" \) \
- -exec sh -c 'echo -e "\n# {}" ; unzip -p {} meta.xml 2>&1' \; \
- | awk -F "</?meta:[^<>]+creator>" '/^#/ { fn = substr ($0, 2) } ; '\
-'/^[^#]/ { print fn"\t"$2 }'
+ -exec unzip -c "{}" meta.xml 2>&1 \; | awk -F "</?meta:[^<>]+creator>" \
+ '/^Archive:/ { fn = gensub ( /^Archive: +(.+)/, "\\1", 1 ) } ; '\
+' /^<office:/ { print fn"\t"$2 }'
 
 Donne :
- ./recup_dir.184/f735839680.ods
  ./recup_dir.184/f735839680.ods Pierre DUPOND
- ./recup_dir.184/f735839808.ods
  ./recup_dir.184/f735839808.ods Paul DURAND
  ...
