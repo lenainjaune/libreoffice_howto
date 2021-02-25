@@ -1,6 +1,20 @@
 Apprendre LibreOffice Writer
 Table des matières
 
+# Manipuler un document LO
+RTFM : https://linux.die.net/man/1/unzip
+
+## Extraire / Ajouter un fichier
+zip <lo_document> <outer_file>
+unzip <lo_document> <inner_file>
+ex : unzip my_writer_file.odt meta.xml
+
+Nota : il peut y avoir un warning concernant le CRC ; à priori on peut l'ignorer
+
+## Afficher le contenu d'un fichier sans l'extraire
+unzip -p <lo_document> <inner_file>
+
+
 # Références multiples à la même note
 Tags : cross-reference endnote footnote
 Voir https://ask.libreoffice.org/en/question/156920/how-do-i-repeat-an-endnote/
@@ -39,13 +53,11 @@ Créer une barre d'outils personnalisée, ajouter les outils voulus
 # Ancrer toutes les images en tant que caractère
 https://bz.apache.org/ooo/show_bug.cgi?id=19814#c14
 
-unzip document_name.odt styles.xml
+extraire le fichier styles.xml
 
 For the record, the workaround given above is wrong in fact. You've to edit the styles.xml file and change the properties in the following tag:
 
 <style:style style:name="Graphics" style:family="graphic">
 text:anchor-type="paragraph" -> text:anchor-type="as-char"
 
-zip document_name.odt styles.xml
-
-Nota : il peut y avoir un warning concernant le CRC ; à priori on peut l'ignorer
+ajouter le fichier modifié
