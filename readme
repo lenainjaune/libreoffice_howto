@@ -12,7 +12,7 @@ ex : unzip my_writer_file.odt meta.xml
 Nota : il peut y avoir un warning concernant le CRC ; à priori on peut l'ignorer
 
 ## Afficher le contenu d'un fichier sans l'extraire
-unzip -p <lo_document> <inner_file>
+unzip -c <lo_document> <inner_file>
 
 
 # Références multiples à la même note
@@ -74,6 +74,13 @@ Donne :
  ./recup_dir.184/f735839680.ods Pierre DUPOND
  ./recup_dir.184/f735839808.ods Paul DURAND
  ...
+
+
+# Rechercher récursivement les documents concernés par une chaine
+S=zero ; IFS=$'\n' ; \
+ for f in $( find -type f \( -name "*.ods" -or -name "*.odt" -or -name "*.odg" \) ) ;\
+  do [[ $( unzip -c "$f" content.xml |grep -ic $S ) > 0 ]] \
+   && echo "$f" ; done ; unset IFS
 
 
 # Réglages par défaut
